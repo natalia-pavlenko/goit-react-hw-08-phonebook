@@ -6,7 +6,7 @@ export const UserMenu = () => {
   const dispatch = useDispatch();
   const { user } = useAuth();
 
-  const handleLogOut = () => dispatch(logOut());
+  // const handleLogOut = () => dispatch(logOut());
 
   return;
   <div className={css.wrapper}>
