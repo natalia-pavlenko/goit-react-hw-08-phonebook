@@ -1,5 +1,7 @@
 import { useDispatch } from 'react-redux';
 import css from './RegisterForm.styled';
+import { register } from 'redux/auth/operations';
+import { NavLink } from 'react-router-dom';
 
 export const RegisterForm = () => {
   const dispatch = useDispatch();
@@ -18,20 +20,25 @@ export const RegisterForm = () => {
   };
 
   return (
-    <form className={css.form} onSubmit={handleSubmit} autoComplete="off">
-      <label className={css.label}>
-        Username
-        <input type="text" name="name" />
-      </label>
-      <label className={css.label}>
-        Email
-        <input type="email" name="email" />
-      </label>
-      <label className={css.label}>
-        Password
-        <input type="password" name="password" />
-      </label>
-      <button type="submit">Register</button>
-    </form>
+    <>
+      <form className={css.form} onSubmit={handleSubmit} autoComplete="off">
+        <label className={css.label}>
+          Username
+          <input type="text" name="name" />
+        </label>
+        <label className={css.label}>
+          Email
+          <input type="email" name="email" />
+        </label>
+        <label className={css.label}>
+          Password
+          <input type="password" name="password" />
+        </label>
+        <button type="submit">Register</button>
+      </form>
+      <p>
+        If you have an account/ <NavLink to="/login">Login</NavLink>
+      </p>
+    </>
   );
 };

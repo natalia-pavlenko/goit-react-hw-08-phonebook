@@ -1,27 +1,35 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import ContactsList from 'components/ContactsList/ContactsList';
 
-export const fetchContacts = createAsyncThunk(
-  'contacts/fatchAll',
-  async (_, thunkAPI) => {
-    try {
-      const response = await axios.get('/contacts');
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
+const ContactsPage = () => {
+return <ContactsList/>
+
+}
+export default ContactsPage;
+
+// import { createAsyncThunk } from '@reduxjs/toolkit';
+// import axios from 'axios';
+
+// export const fetchContacts = createAsyncThunk(
+//   'contacts/fatchAll',
+//   async (_, thunkAPI) => {
+//     try {
+//       const response = await axios.get('/contacts');
+//       return response.data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
 
 
-export const addContact = createAsyncThunk(
-    'contacts/addContacts',
-    async (text, thunkAPI) => {
-      try {
-        const response = await axios.post('/contacts', {text});
-        return response.data;
-      } catch (error) {
-        return thunkAPI.rejectWithValue(error.message);
-      }
-    }
-  );
+// export const addContact = createAsyncThunk(
+//     'contacts/addContacts',
+//     async (text, thunkAPI) => {
+//       try {
+//         const response = await axios.post('/contacts', {text});
+//         return response.data;
+//       } catch (error) {
+//         return thunkAPI.rejectWithValue(error.message);
+//       }
+//     }
+//   );

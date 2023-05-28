@@ -1,16 +1,21 @@
-import { Helmet } from 'react-helmet';
+// import { Helmet } from 'react-helmet';
 import { RegisterForm } from '../components/RegisterForm/RegisterForm';
-
-export default function Register() {
-  return (
-    <div>
-      <Helmet>
-        <titel>Registration</titel>
-      </Helmet>
-      <RegisterForm />
-    </div>
-  );
+const RegisterPage = () => {
+  return <RegisterForm/>
 }
+
+export default RegisterPage;
+
+// export default function Register() {
+//   return (
+//     <div>
+//       <Helmet>
+//         <titel>Registration</titel>
+//       </Helmet>
+//       <RegisterForm />
+//     </div>
+//   );
+// }
 
 // import { useDispatch } from "react-redux";
 

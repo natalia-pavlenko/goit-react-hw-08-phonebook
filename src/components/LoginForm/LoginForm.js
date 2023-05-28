@@ -1,15 +1,16 @@
 import { useDispatch } from 'react-redux';
-import {login} from 'redux/auth/operations'
+import { logIn } from 'redux/auth/operations';
 import css from './LoginForm.styled';
+import { NavLink } from 'react-router-dom';
 
 export const LoginForm = () => {
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const handleSubmit = e => {
     e.preventDefault();
     const form = e.currentTarget;
     dispatch(
-      login({
+      logIn({
         email: form.elements.email.value,
         password: form.elements.password.value,
       })
@@ -18,16 +19,21 @@ const dispatch = useDispatch();
   };
 
   return (
-    <form className={css.form} onSubmit={handleSubmit} autoComplete="off">
-      <label className={css.label}>
-        Email
-        <input type="email" name="email" />
-      </label>
-      <label className={css.label}>
-        Password
-        <input type="password" name="password" />
-      </label>
-      <button type="submit">Log In</button>
-    </form>
+    <>
+      <form className={css.form} onSubmit={handleSubmit} autoComplete="off">
+        <label className={css.label}>
+          Email
+          <input type="email" name="email" />
+        </label>
+        <label className={css.label}>
+          Password
+          <input type="password" name="password" />
+        </label>
+        <button type="submit">Log In</button>
+      </form>
+      <p>
+        If you don't have  an account/ <NavLink to="/register">Register</NavLink>
+      </p>
+    </>
   );
 };

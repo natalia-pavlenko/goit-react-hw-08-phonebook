@@ -3,14 +3,14 @@ import { useAuth } from 'hooks';
 import css from './Navogation.styled';
 
 export const Navigation = () => {
-  const { isLoggedIn } = useAuth;
+  // const { isLoggedIn } = useAuth;
 
   return (
     <nav>
       <NavLink className={css.link} to="/">
         Home
       </NavLink>
-      <NavLink className={css.link} to="/contacts">
+      <NavLink className={css.link} to="contacts">
         Contacts
       </NavLink>
     </nav>
