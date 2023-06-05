@@ -1,44 +1,67 @@
 import { useDispatch } from 'react-redux';
-import css from './RegisterForm.styled';
-import { register } from 'redux/auth/operations';
-import { NavLink } from 'react-router-dom';
 
-export const RegisterForm = () => {
+import { NavLink } from 'react-router-dom';
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
+import { ErrorMessageForm } from './RegisterForm.styled';
+import LoginForm from 'page/Login';
+import { register } from 'redux/auth/operations';
+
+const userSchema = Yup.object({
+  name: Yup.string('Type your name').required('Name is required'),
+  email: Yup.string('Type your email')
+    .email('Type verify email')
+    .required('Email is required'),
+  password: Yup.string('Type your password')
+    .min(5, 'Password must be with 5 length')
+    .required('Password is required'),
+});
+
+const RegisterForm = () => {
   const dispatch = useDispatch();
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    dispatch(
-      register({
-        name: form.elements.name.value,
-        email: form.elements.email.value,
-        password: form.elements.password.value,
-      })
-    );
-    form.reset();
+  const initialValues = {
+    name: '',
+    email: '',
+    password: '',
   };
 
   return (
     <>
-      <form className={css.form} onSubmit={handleSubmit} autoComplete="off">
-        <label className={css.label}>
-          Username
-          <input type="text" name="name" />
-        </label>
-        <label className={css.label}>
-          Email
-          <input type="email" name="email" />
-        </label>
-        <label className={css.label}>
-          Password
-          <input type="password" name="password" />
-        </label>
-        <button type="submit">Register</button>
-      </form>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={userSchema}
+        onSubmit={(values, { resetForm }) => {
+          dispatch(register(values))
+          resetForm();
+        }}
+      >
+        <Form>
+          <label>
+            Name
+            <Field type="text" name="name" />
+          </label>
+
+          <ErrorMessageForm component="p" name="name" />
+          <label>
+            Email
+            <Field type="text" name="email" />
+          </label>
+          <ErrorMessageForm component="p" name="email" />
+          <label>
+            Password
+            <Field type="text" name="password" />
+          </label>
+          <ErrorMessageForm component="p" name="password" />
+
+          <button type="submit">Register</button>
+        </Form>
+      </Formik>
       <p>
-        If you have an account/ <NavLink to="/login">Login</NavLink>
+        If you have an account <NavLink to="/login">Login</NavLink>
       </p>
     </>
   );
 };
+
+export default RegisterForm;

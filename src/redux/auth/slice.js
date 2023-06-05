@@ -4,20 +4,25 @@ import { logIn, logOut, refreshUser, register } from './operations';
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    user: { name: null, email: null },
+    user: { name: null, email: null, password: null },
     token: null,
+    isLoading: false,
     isLoggedIn: false,
     isRefreshing: false,
   },
   extraReducers: bulder =>
     bulder
-      .addCase(register.pending, (state, action) => state)
+      .addCase(register.pending, (state, action) =>{
+          state.isLoading = true;
+      })
       .addCase(register.fulfilled, (state, action) => {
+        console.log(action);
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
+        state.isLoading = false;
       })
-      .addCase(register.rejected, (state, action) => state)
+     
       .addCase(logIn.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;

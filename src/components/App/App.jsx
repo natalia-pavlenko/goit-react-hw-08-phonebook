@@ -1,7 +1,3 @@
-// import ContactForm from 'components/ContactForm/ContactForm';
-// import ContactsList from 'components/ContactsList/ContactsList';
-// import Filter from 'components/Filter/Filter';
-// import { AppText, AppDiv } from './App.styled';
 import { Route, Routes } from 'react-router-dom';
 import { lazy } from 'react';
 import { Layout } from 'components/Layout';
@@ -22,13 +18,6 @@ const App = () => {
           <Route path='register' element={<RegisterPage/>}/>
         </Route>
       </Routes>
-      {/* <AppDiv>
-        <AppText>Phonebook</AppText>
-        <ContactForm  />
-        <AppText>Contacts</AppText>
-        <Filter />
-        <ContactsList/>
-      </AppDiv> */}
     </>
   );
 };

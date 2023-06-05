@@ -1,39 +1,55 @@
 import { useDispatch } from 'react-redux';
-import { logIn } from 'redux/auth/operations';
-import css from './LoginForm.styled';
 import { NavLink } from 'react-router-dom';
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
+import { ErrorMessageForm } from './LoginForm.styled';
 
-export const LoginForm = () => {
+const userSchema = Yup.object({
+  email: Yup.string('Type your email')
+    .email('Type verify email')
+    .required('Email is required'),
+  password: Yup.string('Type your password')
+    .min(5, 'Password must be with 5 length')
+    .required('Password is required'),
+});
+
+const LoginForm = () => {
   const dispatch = useDispatch();
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    dispatch(
-      logIn({
-        email: form.elements.email.value,
-        password: form.elements.password.value,
-      })
-    );
-    form.reset();
+  const initialValues = {
+    email: '',
+    password: '',
   };
 
   return (
     <>
-      <form className={css.form} onSubmit={handleSubmit} autoComplete="off">
-        <label className={css.label}>
-          Email
-          <input type="email" name="email" />
-        </label>
-        <label className={css.label}>
-          Password
-          <input type="password" name="password" />
-        </label>
-        <button type="submit">Log In</button>
-      </form>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={userSchema}
+        onSubmit={(values, { resetForm }) => {
+          console.log(values);
+          resetForm();
+        }}
+      >
+        <Form>
+          <label>
+            Email
+            <Field type="text" name="email" />
+          </label>
+          <ErrorMessageForm component="p" name="email" />
+          <label>
+            Password
+            <Field type="text" name="password" />
+          </label>
+          <ErrorMessageForm component="p" name="password" />
+
+          <button type="submit">Login</button>
+        </Form>
+      </Formik>
       <p>
-        If you don't have  an account/ <NavLink to="/register">Register</NavLink>
+        If you don't have an account <NavLink to="/register">Register</NavLink>
       </p>
     </>
   );
 };
+export default LoginForm ;
