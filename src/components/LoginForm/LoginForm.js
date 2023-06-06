@@ -3,6 +3,9 @@ import { NavLink } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { ErrorMessageForm } from './LoginForm.styled';
+import { logIn } from 'redux/auth/operations';
+
+
 
 const userSchema = Yup.object({
   email: Yup.string('Type your email')
@@ -27,7 +30,7 @@ const LoginForm = () => {
         initialValues={initialValues}
         validationSchema={userSchema}
         onSubmit={(values, { resetForm }) => {
-          console.log(values);
+          dispatch(logIn(values));
           resetForm();
         }}
       >
