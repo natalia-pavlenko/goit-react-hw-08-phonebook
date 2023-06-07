@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { ErrorMessageForm } from './RegisterForm.styled';
-import LoginForm from 'page/Login';
+// import LoginForm from 'page/Login';
 import { register } from 'redux/auth/operations';
 
 const userSchema = Yup.object({
