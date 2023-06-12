@@ -21,11 +21,11 @@ const ContactsList = () => {
     <ContactsUl>
       {contacts
         .filter(({ name }) => name.toLowerCase().includes(filter.toLowerCase()))
-        .map(({ id, name, phone }) => {
+        .map(({ id, name, number }) => {
           return (
-            <>
-              <ContactItem key={id} id={id} name={name} phone={phone} />
-            </>
+            <div key={id}>
+              <ContactItem  id={id} name={name} number={number} />
+            </div>
           );
         })}
     </ContactsUl>
